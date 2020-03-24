@@ -1,0 +1,101 @@
+{
+    "MySQL":{
+        //root:12345@tcp(127.0.0.1:3306)/db
+        "Uri":"root:123456@tcp(127.0.0.1:3306)/yun"
+    },
+    "Redis":{
+        "Uri":"redis://127.0.0.1:6379",
+        "Pwd":"",
+        "Queue":"001"
+    },
+    "MongoDB": {
+        //mongodb://username:password@127.0.0.1:port
+        "Uri":"mongodb://root:123456@127.0.0.1"
+    },
+    "AliyunSms":{
+      "Sms":false,
+      "AccessKeyId":"xxxxxx",
+      "AccessKeySecret":"xxxxx",
+      "SignName":"大讯云",
+      "TemplateCode":"SMS_xxxxx"
+    },
+	"Module":{
+        "Gate":[
+                {
+                    //Id在整个Module中必须唯一,不能重复
+                    "Id":"Gate001",
+                    "ProcessID":"development",
+                    "Settings":{
+                        "WSAddr":      	 ":3853",
+                        "TCPAddr":     	 ":3863",
+                        "MaxMsgLen":     4096,
+                        "HTTPTimeout":   10,
+                        "MaxConnNum" :   20000,
+                        "Tls"        :   false,
+                        "CertFile"       :   "/daxunyun/sslkey/cert.pem",
+                        "KeyFile"        :   "/daxunyun/sslkey/key.pem",
+                        //Session持久化心跳包 单位/秒
+                        "MinHBStorage"  :   30
+                    }
+                }
+            ],
+        "Master":[
+                        {
+                            "Id":"Master001",
+                            "ProcessID":"development"
+                        }
+                ],
+        "login":[
+                {
+                    "Id":"login001",
+                    "ProcessID":"development"
+                }
+        ],
+      "register":[
+        {
+          "Id":"register001",
+          "ProcessID":"development"
+        }
+      ],
+        "devices":[
+                {
+                    "Id":"devices001",
+                    "ProcessID":"development"
+                }
+        ],
+        "Webapp":[
+                        {
+                            "Id":"Webapp001",
+                            "ProcessID":"development",
+                            "HTTPAddr":   ":8182",
+                            "Settings":{
+                                "StaticPath":"/daxunyun/server/bin"
+                                //更改为你本机上daxunyunserver bin的绝对路径
+                            }
+                        }
+                ]
+	},
+	"Mqtt":{
+        //是否启用mqtt帐密验证，防止别人乱连接
+        "MqttAuth":      true,
+        //mqtt连接帐号，在app SDK都要对应填写，不然将连不上
+        "MqttUser":      "填写mqtt的连接用户名",
+        //mqtt连接密码，在app SDK都要对应填写，不然将连不上
+        "MqttPass":      "填写mqtt的连接密码",
+	    // 最大写入包队列缓存
+        "WirteLoopChanNum": 10,
+        // 最大读取包队列缓存
+        "ReadPackLoop": 1,
+        // 读取超时
+        "ReadTimeout": 600,
+        // 写入超时
+        "WriteTimeout": 300
+	},
+    "Rpc":{
+        "MaxCoroutine":100,
+        // 远程访问最后期限值 单位秒 这个值指定了在客户端可以等待服务端多长时间来应答
+        "RpcExpired": 3,
+        //默认是 false 不打印
+        "LogSuccess":false
+    }
+}
